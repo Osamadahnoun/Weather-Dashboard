@@ -1,7 +1,6 @@
 * {
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    padding: 0;  
 }
 
 body {
@@ -14,6 +13,7 @@ header {
     font-weight: bolder;
     font-size: xx-large;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     height: 75px;
@@ -22,6 +22,7 @@ header {
 .leftColumn {
     display: inline-flex;
     flex-direction: column;
+    flex-wrap: wrap;
     /* justify-content: space-around; */
     padding-top: 30px;
     padding-right: 30px;
@@ -48,19 +49,21 @@ input {
 .rightColumnTop {
     display: inline-flex;
     flex-direction: column;
+    flex-wrap: wrap;
 }
 
 .rightColumnBottom {
-    display: inline-flex;
+    display: flex;
     position: relative;
-    flex-direction: row;
-    top: 200px;
-    right: 400px
+    flex-wrap: wrap;
+    justify-content: center;
+  
 }
 
-#forecast {
-    margin: 20px;
-    margin-top: 50px;
-    
-    
+.blackBox {
+    background-color: navy;
+    color: white;
+    padding: 10px;
+    margin: 15px;
 }
+
