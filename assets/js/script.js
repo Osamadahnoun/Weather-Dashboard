@@ -41,6 +41,12 @@ var t5 = document.querySelector('#t5');
 var w5 = document.querySelector('#w5');
 var h5 = document.querySelector('#h5');
 
+var hist1 = document.querySelector('#hist1');
+var hist2 = document.querySelector('#hist2');
+var hist3 = document.querySelector('#hist3');
+var hist4 = document.querySelector('#hist4');
+
+let searchHistory = [];
 
 var getForecastTop = function(city) {
     var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=a62c9480c48f3b86915de34ca4d5c7a9&units=imperial"
@@ -93,46 +99,46 @@ var getForecastBottom = function(city) {
                     // var iconCode = data.list[2].weather[0].icon
                     // var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png"
                     // console.log(iconUrl)
-                    // console.log(data)
+                    console.log(data)
                     d1.textContent = day1
-                    var icon1 = data.list[4].weather[0].icon
+                    var icon1 = data.list[6].weather[0].icon
                     iconSelect1.innerHTML = `<img src="./icons/${icon1}.png">`
                     // icon1.textContent = data.list[2].weather[0].icon
-                    t1.textContent = "Temp: " + data.list[4].main.temp + "°F"
-                    w1.textContent = "Wind: " + data.list[4].wind.speed + " MPH"
-                    h1.textContent = "Humidity: " + data.list[4].main.humidity + "%"
+                    t1.textContent = "Temp: " + data.list[6].main.temp + "°F"
+                    w1.textContent = "Wind: " + data.list[6].wind.speed + " MPH"
+                    h1.textContent = "Humidity: " + data.list[6].main.humidity + "%"
 
                     d2.textContent = day2
-                    var icon2 = data.list[12].weather[0].icon
+                    var icon2 = data.list[14].weather[0].icon
                     iconSelect2.innerHTML = `<img src="./icons/${icon2}.png">`
                     // icon2.textContent = data.list[12].weather[0].icon
-                    t2.textContent = "Temp: " + data.list[12].main.temp + "°F"
-                    w2.textContent = "Wind: " + data.list[12].wind.speed + " MPH"
-                    h2.textContent = "Humidity: " + data.list[12].main.humidity + "%"
+                    t2.textContent = "Temp: " + data.list[14].main.temp + "°F"
+                    w2.textContent = "Wind: " + data.list[14].wind.speed + " MPH"
+                    h2.textContent = "Humidity: " + data.list[14].main.humidity + "%"
 
                     d3.textContent = day3
-                    var icon3 = data.list[20].weather[0].icon
+                    var icon3 = data.list[22].weather[0].icon
                     iconSelect3.innerHTML = `<img src="./icons/${icon3}.png">`
                     // icon3.textContent = data.list[20].weather[0].icon
-                    t3.textContent = "Temp: " + data.list[20].main.temp + "°F"
-                    w3.textContent = "Wind: " + data.list[20].wind.speed + " MPH"
-                    h3.textContent = "Humidity: " + data.list[20].main.humidity + "%"
+                    t3.textContent = "Temp: " + data.list[22].main.temp + "°F"
+                    w3.textContent = "Wind: " + data.list[22].wind.speed + " MPH"
+                    h3.textContent = "Humidity: " + data.list[22].main.humidity + "%"
 
                     d4.textContent = day4
-                    var icon4 = data.list[28].weather[0].icon
+                    var icon4 = data.list[30].weather[0].icon
                     iconSelect4.innerHTML = `<img src="./icons/${icon4}.png">`
                     // icon4.textContent = data.list[28].weather[0].icon
-                    t4.textContent = "Temp: " + data.list[28].main.temp + "°F"
-                    w4.textContent = "Wind: " + data.list[28].wind.speed + " MPH"
-                    h4.textContent = "Humidity: " + data.list[28].main.humidity + "%"
+                    t4.textContent = "Temp: " + data.list[30].main.temp + "°F"
+                    w4.textContent = "Wind: " + data.list[30].wind.speed + " MPH"
+                    h4.textContent = "Humidity: " + data.list[30].main.humidity + "%"
 
                     d5.textContent = day5
-                    var icon5 = data.list[36].weather[0].icon
+                    var icon5 = data.list[38].weather[0].icon
                     iconSelect5.innerHTML = `<img src="./icons/${icon5}.png">`
                     // icon5.textContent = data.list[36].weather[0].icon
-                    t5.textContent = "Temp: " + data.list[36].main.temp + "°F"
-                    w5.textContent = "Wind: " + data.list[36].wind.speed + " MPH"
-                    h5.textContent = "Humidity: " + data.list[36].main.humidity + "%"
+                    t5.textContent = "Temp: " + data.list[38].main.temp + "°F"
+                    w5.textContent = "Wind: " + data.list[38].wind.speed + " MPH"
+                    h5.textContent = "Humidity: " + data.list[38].main.humidity + "%"
                     
                 })
             }
@@ -147,4 +153,19 @@ var search = function() {
     })
 }
 
+
+var storage = function() {
+    button.addEventListener('click', function() {
+        var inp = input.value;
+        if (inp) {
+            searchHistory.push(inp)
+            localStorage.setItem('Search History: ', searchHistory);
+        }
+    })
+}
+
+var get = localStorage.getItem('Search History: ');
+console.log(get);
+
 search();
+storage();
