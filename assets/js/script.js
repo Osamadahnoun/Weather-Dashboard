@@ -45,8 +45,9 @@ var hist1 = document.querySelector('#hist1');
 var hist2 = document.querySelector('#hist2');
 var hist3 = document.querySelector('#hist3');
 var hist4 = document.querySelector('#hist4');
+var hist5 = document.querySelector('#hist5')
 
-let searchHistory = [];
+var searchHistory = [];
 
 var getForecastTop = function(city) {
     var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=a62c9480c48f3b86915de34ca4d5c7a9&units=imperial"
@@ -63,7 +64,7 @@ var getForecastTop = function(city) {
         .then(function(response) {
             if(response.ok) {
                 response.json().then(function(data) {
-                    console.log(data)
+                    // console.log(data)
                     cityDate.innerHTML = city + " (" + currentDay.textContent + ")"
                     var icon0 = data.weather[0].icon;
                     iconSelect0.innerHTML = `<img src="./icons/${icon0}.png">`
@@ -99,7 +100,7 @@ var getForecastBottom = function(city) {
                     // var iconCode = data.list[2].weather[0].icon
                     // var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png"
                     // console.log(iconUrl)
-                    console.log(data)
+                    // console.log(data)
                     d1.textContent = day1
                     var icon1 = data.list[6].weather[0].icon
                     iconSelect1.innerHTML = `<img src="./icons/${icon1}.png">`
@@ -158,14 +159,48 @@ var storage = function() {
     button.addEventListener('click', function() {
         var inp = input.value;
         if (inp) {
+            localStorage.setItem('Search History: ', '[]');
+            var get = localStorage.getItem('Search History: ');
             searchHistory.push(inp)
-            localStorage.setItem('Search History: ', searchHistory);
         }
+        // var get = localStorage.getItem('Search History: ');
+        // searchHistory.push(inp)
+
+        localStorage.setItem('Search History: ', searchHistory)
+        console.log(searchHistory)
+        
+        hist1.textContent = searchHistory[0];
+        hist2.textContent = searchHistory[1];
+        hist3.textContent = searchHistory[2];
+        hist4.textContent = searchHistory[3];
+        hist5.textContent = searchHistory[4];
     })
 }
 
-var get = localStorage.getItem('Search History: ');
-console.log(get);
+var historySearch = function() {
+    hist1.addEventListener('click', function() {
+        getForecastTop(hist1.textContent);
+        getForecastBottom(hist1.textContent);
+    })
+    hist2.addEventListener('click', function() {
+        getForecastTop(hist2.textContent);
+        getForecastBottom(hist2.textContent);
+    })
+    hist3.addEventListener('click', function() {
+        getForecastTop(hist3.textContent);
+        getForecastBottom(hist3.textContent);
+    })
+    hist4.addEventListener('click', function() {
+        getForecastTop(hist4.textContent);
+        getForecastBottom(hist4.textContent);
+    })
+    hist5.addEventListener('click', function() {
+        getForecastTop(hist5.textContent);
+        getForecastBottom(hist5.textContent);
+    })
+}
+
 
 search();
 storage();
+historySearch();
