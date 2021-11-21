@@ -9,7 +9,7 @@ Weather-Planner is a simple application to quickly recieve current and future we
 * JavaScript
 
 ## Link to Deployed Application
-https://osamadahnoun.github.io/Weather-Dashboard/
+https://osamadahnoun.github.io/Weather-Planner/
 
 ## Screenshot of Deployed Application
 ![Screenshot of Deployed Application](./assets/images/WeatherScrSht.png)
