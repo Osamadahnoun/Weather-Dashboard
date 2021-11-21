@@ -56,7 +56,6 @@ var getForecastTop = function(city) {
     var temp = document.querySelector('#temp');
     var wind = document.querySelector('#wind');
     var humidity = document.querySelector('#humidity');
-    var uvIndex = document.querySelector('#index');
     var iconSelect0 = document.querySelector('#icon0');
     
 
@@ -64,13 +63,44 @@ var getForecastTop = function(city) {
         .then(function(response) {
             if(response.ok) {
                 response.json().then(function(data) {
-                    // console.log(data)
+                    var long = data.coord.lon
+                    var lat = data.coord.lat
+                    getUvIndex(lat,long);
                     cityDate.innerHTML = city + " (" + currentDay.textContent + ")"
                     var icon0 = data.weather[0].icon;
                     iconSelect0.innerHTML = `<img src="./icons/${icon0}.png">`
                     temp.textContent = "Temp: " + data.main.temp + "°F"
                     wind.textContent = "Wind: " + data.wind.speed + " MPH"
                     humidity.textContent = "Humidity: " + data.main.humidity + "%"
+                })
+            }
+        })
+}
+
+var getUvIndex = function(lat, long) {
+    var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + long + "&appid=a62c9480c48f3b86915de34ca4d5c7a9"
+
+    fetch(apiUrl)
+        .then(function(response) {
+            if(response.ok) {
+                response.json().then(function(data) {
+                    var uvIndexNum = document.querySelector('#indexNumber');
+                    var uvIndex = data.current.uvi
+                    uvIndexNum.textContent = "UV Index: " + uvIndex
+
+                    if (uvIndex <= 2) {
+                        uvIndexNum.classList.add('indexFavorable')
+                    }
+                    else if (uvIndex >= 3 && uvIndex <=5) {
+                        uvIndexNum.classList.add('indexModerate')
+                    }
+                    else if (uvIndex >= 6 && uvIndex <=7) {
+                        uvIndexNum.classList.add('indexSevere')
+                    }
+                    else {
+                        uvIndexNum.classList.add('indexVerySevere')
+
+                    }
                 })
             }
         })
@@ -167,7 +197,7 @@ var storage = function() {
         // searchHistory.push(inp)
 
         localStorage.setItem('Search History: ', searchHistory)
-        console.log(searchHistory)
+        // console.log(searchHistory)
         
         hist1.textContent = searchHistory[0];
         hist2.textContent = searchHistory[1];
@@ -202,5 +232,7 @@ var historySearch = function() {
 
 
 search();
+
 storage();
+
 historySearch();

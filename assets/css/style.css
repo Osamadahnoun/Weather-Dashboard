@@ -67,3 +67,31 @@ input {
     margin: 15px;
 }
 
+.indexFavorable {
+    background-color: green;
+    border-radius: 12px;
+    padding: 3px;
+    color: white;
+}
+
+.indexSevere {
+    background-color: orange;
+    border-radius: 12px;
+    padding: 3px;
+    color: white;
+}
+
+.indexVerySevere {
+    background-color: red;
+    border-radius: 12px;
+    padding: 3px;
+    color: white;
+}
+
+.indexModerate {
+    background-color: grey;
+    border-radius: 12px;
+    padding: 3px;
+    color: white;
+}
+
